@@ -1,0 +1,30 @@
+/* Tempo Ember — Obsidian 설정 > 모양 > CSS 스니펫. tokens.json에서 generate.py가 만든다 */
+.theme-dark {
+  --background-primary: #0f0c09;
+  --background-primary-alt: #1a1510;
+  --background-secondary: #1a1510;
+  --background-secondary-alt: #241d16;
+  --background-modifier-border: #3a3026;
+  --background-modifier-hover: #241d16;
+  --text-normal: #efe3cf;
+  --text-muted: #a8977f;
+  --text-faint: #9a8a73;
+  --text-accent: #d79a45;
+  --text-accent-hover: #ffe08a;
+  --interactive-accent: #d79a45;
+  --interactive-accent-hover: #ffe08a;
+  --text-on-accent: #0f0c09;
+  --text-selection: #4a3c2c;
+  --text-highlight-bg: #f5c84b33;
+  --text-error: #ff6a45;
+  --text-success: #46f0a0;
+  --text-warning: #f5c84b;
+  --color-red: #ff6a45;
+  --color-green: #46f0a0;
+  --color-yellow: #f5c84b;
+  --color-orange: #d79a45;
+  --color-blue: #7fb0cc;
+  --color-purple: #d199c4;
+  --color-cyan: #62d3c6;
+  --code-background: #1a1510;
+}

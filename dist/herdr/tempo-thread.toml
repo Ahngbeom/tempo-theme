@@ -1,0 +1,24 @@
+# Tempo Thread — ~/.config/herdr/config.toml에 붙인다
+[theme]
+name = "catppuccin"
+
+[theme.custom]
+accent = "#e8a33d"
+panel_bg = "#050b0b"
+sidebar_bg = "#0b1615"
+active_row_bg = "#12211f"
+selection_bg = "#24423b"
+surface0 = "#0b1615"
+surface1 = "#12211f"
+surface_dim = "#050b0b"
+overlay0 = "#7b9d90"
+overlay1 = "#86ab9c"
+text = "#dcf3e7"
+subtext0 = "#86ab9c"
+mauve = "#c896dc"
+green = "#46f0a0"
+yellow = "#f2c14a"
+red = "#ff5d3a"
+blue = "#62aee8"
+teal = "#4fd6d0"
+peach = "#e8a33d"

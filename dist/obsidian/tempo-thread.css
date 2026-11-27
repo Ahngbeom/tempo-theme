@@ -1,0 +1,30 @@
+/* Tempo Thread — Obsidian 설정 > 모양 > CSS 스니펫. tokens.json에서 generate.py가 만든다 */
+.theme-dark {
+  --background-primary: #050b0b;
+  --background-primary-alt: #0b1615;
+  --background-secondary: #0b1615;
+  --background-secondary-alt: #12211f;
+  --background-modifier-border: #1f3530;
+  --background-modifier-hover: #12211f;
+  --text-normal: #dcf3e7;
+  --text-muted: #86ab9c;
+  --text-faint: #7b9d90;
+  --text-accent: #e8a33d;
+  --text-accent-hover: #f7d98a;
+  --interactive-accent: #e8a33d;
+  --interactive-accent-hover: #f7d98a;
+  --text-on-accent: #050b0b;
+  --text-selection: #24423b;
+  --text-highlight-bg: #f2c14a33;
+  --text-error: #ff5d3a;
+  --text-success: #46f0a0;
+  --text-warning: #f2c14a;
+  --color-red: #ff5d3a;
+  --color-green: #46f0a0;
+  --color-yellow: #f2c14a;
+  --color-orange: #e8a33d;
+  --color-blue: #62aee8;
+  --color-purple: #c896dc;
+  --color-cyan: #4fd6d0;
+  --code-background: #0b1615;
+}

@@ -1,0 +1,15 @@
+/* tempo-theme: tokens.json에서 generate.py가 만든다. 고치지 말 것 */
+:root[data-theme="tempo-ember"], .tempo-ember {
+  color-scheme: dark;
+  --tempo-void: #0f0c09; --tempo-archive: #1a1510; --tempo-drawer: #241d16; --tempo-seam: #3a3026; --tempo-paper: #efe3cf; --tempo-dust: #a8977f; --tempo-ash: #9a8a73; --tempo-brass: #d79a45; --tempo-thread: #46f0a0; --tempo-signal: #f5c84b; --tempo-branch: #ff6a45;
+  --bg: var(--tempo-void); --panel: var(--tempo-archive); --soft: var(--tempo-drawer); --line: var(--tempo-seam); --ink: var(--tempo-paper); --muted: var(--tempo-dust); --faint: var(--tempo-ash); --accent: var(--tempo-brass); --ok: var(--tempo-thread); --warn: var(--tempo-signal); --err: var(--tempo-branch);
+  --ok-bg: color-mix(in srgb, var(--tempo-thread) 12%, var(--tempo-archive)); --warn-bg: color-mix(in srgb, var(--tempo-signal) 12%, var(--tempo-archive)); --err-bg: color-mix(in srgb, var(--tempo-branch) 14%, var(--tempo-archive)); --info-bg: color-mix(in srgb, var(--tempo-brass) 12%, var(--tempo-archive));
+  --tempo-glow: 0 0 10px color-mix(in srgb, var(--tempo-thread) 45%, transparent); --tempo-selection: #4a3c2c;
+}
+:root[data-theme="tempo-thread"], .tempo-thread {
+  color-scheme: dark;
+  --tempo-void: #050b0b; --tempo-archive: #0b1615; --tempo-drawer: #12211f; --tempo-seam: #1f3530; --tempo-paper: #dcf3e7; --tempo-dust: #86ab9c; --tempo-ash: #7b9d90; --tempo-brass: #e8a33d; --tempo-thread: #46f0a0; --tempo-signal: #f2c14a; --tempo-branch: #ff5d3a;
+  --bg: var(--tempo-void); --panel: var(--tempo-archive); --soft: var(--tempo-drawer); --line: var(--tempo-seam); --ink: var(--tempo-paper); --muted: var(--tempo-dust); --faint: var(--tempo-ash); --accent: var(--tempo-brass); --ok: var(--tempo-thread); --warn: var(--tempo-signal); --err: var(--tempo-branch);
+  --ok-bg: color-mix(in srgb, var(--tempo-thread) 12%, var(--tempo-archive)); --warn-bg: color-mix(in srgb, var(--tempo-signal) 12%, var(--tempo-archive)); --err-bg: color-mix(in srgb, var(--tempo-branch) 14%, var(--tempo-archive)); --info-bg: color-mix(in srgb, var(--tempo-brass) 12%, var(--tempo-archive));
+  --tempo-glow: 0 0 10px color-mix(in srgb, var(--tempo-thread) 45%, transparent); --tempo-selection: #24423b;
+}
