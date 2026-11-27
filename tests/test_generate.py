@@ -59,5 +59,19 @@ class Generate(unittest.TestCase):
             self.assertEqual(css.count(name), len(generate.TOKENS["variants"]), name)
 
 
+    def test_claude_design_cards(self):
+        cards = sorted((ROOT / "dist/claude-design/preview").glob("*.html"))
+        self.assertEqual(len(cards), len(list((ROOT / "design/cards").glob("*.html"))))
+        for f in cards:
+            text = f.read_text()
+            self.assertRegex(text.split("\n", 1)[0], r'^<!-- @dsCard group="[^"]+" -->$', f.name)
+            self.assertNotIn("{{", text, f.name)
+            self.assertNotIn("<link", text, f"{f.name}: 카드는 혼자 열려야 한다")
+            for key in generate.TOKENS["variants"]:
+                self.assertIn(f'class="v tempo-{key}"', text, f.name)
+        guide = (ROOT / "dist/claude-design/README.md").read_text()
+        self.assertEqual(guide, (ROOT / "design/guide.md").read_text())
+
+
 if __name__ == "__main__":
     unittest.main()

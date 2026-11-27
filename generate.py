@@ -165,6 +165,33 @@ def specimen():
     return tpl
 
 
+def claude_design():
+    d = ROOT / "design"
+    style = css() + (d / "components.css").read_text() + (d / "preview.css").read_text()
+
+    def fill(frag, key):
+        v = TOKENS["variants"][key]
+        p = v["primitive"]
+        sw = "".join(f'<div><i style="background:{h}"></i><b>{k}</b><span>{h}</span></div>' for k, h in p.items())
+        ansi = "".join(f'<i style="background:{h}" title="ansi{i} {h}"></i>' for i, h in enumerate(v["ansi"]))
+        rows = "".join(f'<tr><td class="mono">--{k}</td><td>{n}</td><td><i class="chip" style="background:{p[n]}"></i><span class="mono">{p[n]}</span></td></tr>'
+                       for k, n in TOKENS["semantic"].items())
+        rows += "".join(f'<tr><td class="mono">--{k}</td><td>{n} {pct}%</td><td><i class="chip" style="background:var(--{k})"></i>archive 위</td></tr>'
+                        for k, (n, pct) in TOKENS["tint"].items())
+        for name, val in (("label", v["label"]), ("swatches", sw), ("ansi", ansi), ("semantic", rows)):
+            frag = frag.replace("{{" + name + "}}", val)
+        return frag
+
+    files = {"dist/claude-design/README.md": (d / "guide.md").read_text(), "dist/claude-design/tokens.css": css()}
+    for card in sorted((d / "cards").glob("*.html")):
+        marker, frag = card.read_text().split("\n", 1)
+        body = "".join(f'<section class="v tempo-{key}">\n{fill(frag, key)}</section>\n' for key in TOKENS["variants"])
+        files[f"dist/claude-design/preview/{card.name}"] = (
+            f'{marker}\n<!doctype html>\n<html lang="ko">\n<meta charset="utf-8">\n<title>tempo · {card.stem}</title>\n'
+            f'<style>\n{style}</style>\n<body>\n<div class="pair">\n{body}</div>\n</body>\n</html>\n')
+    return files
+
+
 def outputs():
     files = {"dist/css/tempo.css": css(), "dist/swift/TempoTheme.swift": swift(), "specimen/index.html": specimen()}
     for key, v in TOKENS["variants"].items():
@@ -173,6 +200,7 @@ def outputs():
         files[f"dist/herdr/tempo-{key}.toml"] = herdr(v)
         files[f"dist/ansi256/tempo-{key}.json"] = ansi256(v)
         files[f"dist/obsidian/tempo-{key}.css"] = obsidian(v)
+    files.update(claude_design())
     return files
 
 

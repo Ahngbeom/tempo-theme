@@ -15,11 +15,7 @@
 
 ## 색 쓰는 규칙
 
-- 녹색 `thread`는 지금 흐르는 것(동작 중·정상·실시간 그래프)에만 쓴다
-- 경고 `signal`과 틀 색 `brass`는 색상이 가깝다. 상태는 색만으로 나타내지 않고 모양을 함께 쓴다: 정상 ●, 경고 ▲, 오류 ◆, 대기 ○
-- 고정폭 글꼴은 시각과 수치에만 쓴다. 라벨에는 쓰지 않는다
-- 서체는 시스템 서체를 쓴다(Pretendard, Apple SD Gothic Neo, Noto Sans KR)
-- `generate.py --check`는 본문색(`paper` `dust` `brass` `thread` `signal` `branch`)이 바탕 세 단(`void` `archive` `drawer`)에서 4.5:1, 터미널 색이 바탕에서 4.5:1(밝은 검정은 3:1)을 넘는지 본다
+색·서체·모양 규칙은 [`design/guide.md`](design/guide.md)에 있다. 같은 문서가 Claude Design 디자인 시스템의 안내문이 된다.
 
 ## 도구별 파일
 
@@ -32,8 +28,25 @@
 | 256색 도구 | `dist/ansi256/tempo-ember.json` | 원색·16색마다 가장 가까운 xterm 256색 번호. shell-prompt·claude-statusline 테마가 쓴다 |
 | Swift (AppKit) | `dist/swift/TempoTheme.swift` | `TempoTheme.ember.brass` 같은 `NSColor` |
 | Obsidian | `dist/obsidian/tempo-ember.css` | 보관함의 `.obsidian/snippets/`에 복사하고 설정 > 모양 > CSS 스니펫에서 켠다. 어두운 모드에서만 적용된다 |
+| Claude Design | `dist/claude-design/` | 디자인 시스템 프로젝트에 올린다. 아래 "Claude Design" 참고 |
 
 다른 저장소는 필요한 파일을 복사해 가고, 파일 머리나 커밋 메시지에 이 저장소의 커밋을 적는다.
+
+## Claude Design
+
+`dist/claude-design/`은 Claude Design 디자인 시스템 프로젝트에 올리는 묶음이다.
+
+| 파일 | 원본 |
+|---|---|
+| `README.md` | `design/guide.md` 그대로 |
+| `tokens.css` | `dist/css/tempo.css`와 같다 |
+| `preview/*.html` | `design/cards/*.html` 조각을 두 변형으로 나란히 펼친 카드. 첫 줄 `@dsCard` 표시로 디자인 시스템 창의 묶음(Colors·Type·Components·Terminal)이 정해진다 |
+
+1. 카드를 더하거나 고치려면 `design/cards/`에 조각을 쓴다. 첫 줄은 `<!-- @dsCard group="묶음" -->`, 본문에서 `{{label}}` `{{swatches}}` `{{ansi}}` `{{semantic}}`을 쓸 수 있다. 부품 모양은 `design/components.css`
+2. `python3 generate.py`로 다시 만든다
+3. 이 저장소에서 Claude Code의 `/design-sync`로 `dist/claude-design/`을 프로젝트에 맞춘다
+
+Claude Design에서 색을 직접 고치지 않는다. 고친 색은 다른 도구 파일과 어긋난다.
 
 ## 색 바꾸기
 

@@ -1,0 +1,98 @@
+<!-- @dsCard group="Terminal" -->
+<!doctype html>
+<html lang="ko">
+<meta charset="utf-8">
+<title>tempo · terminal</title>
+<style>
+/* tempo-theme: tokens.json에서 generate.py가 만든다. 고치지 말 것 */
+:root[data-theme="tempo-ember"], .tempo-ember {
+  color-scheme: dark;
+  --tempo-void: #0f0c09; --tempo-archive: #1a1510; --tempo-drawer: #241d16; --tempo-seam: #3a3026; --tempo-paper: #efe3cf; --tempo-dust: #a8977f; --tempo-ash: #9a8a73; --tempo-brass: #d79a45; --tempo-thread: #46f0a0; --tempo-signal: #f5c84b; --tempo-branch: #ff6a45;
+  --bg: var(--tempo-void); --panel: var(--tempo-archive); --soft: var(--tempo-drawer); --line: var(--tempo-seam); --ink: var(--tempo-paper); --muted: var(--tempo-dust); --faint: var(--tempo-ash); --accent: var(--tempo-brass); --ok: var(--tempo-thread); --warn: var(--tempo-signal); --err: var(--tempo-branch);
+  --ok-bg: color-mix(in srgb, var(--tempo-thread) 12%, var(--tempo-archive)); --warn-bg: color-mix(in srgb, var(--tempo-signal) 12%, var(--tempo-archive)); --err-bg: color-mix(in srgb, var(--tempo-branch) 14%, var(--tempo-archive)); --info-bg: color-mix(in srgb, var(--tempo-brass) 12%, var(--tempo-archive));
+  --tempo-glow: 0 0 10px color-mix(in srgb, var(--tempo-thread) 45%, transparent); --tempo-selection: #4a3c2c;
+}
+:root[data-theme="tempo-thread"], .tempo-thread {
+  color-scheme: dark;
+  --tempo-void: #050b0b; --tempo-archive: #0b1615; --tempo-drawer: #12211f; --tempo-seam: #1f3530; --tempo-paper: #dcf3e7; --tempo-dust: #86ab9c; --tempo-ash: #7b9d90; --tempo-brass: #e8a33d; --tempo-thread: #46f0a0; --tempo-signal: #f2c14a; --tempo-branch: #ff5d3a;
+  --bg: var(--tempo-void); --panel: var(--tempo-archive); --soft: var(--tempo-drawer); --line: var(--tempo-seam); --ink: var(--tempo-paper); --muted: var(--tempo-dust); --faint: var(--tempo-ash); --accent: var(--tempo-brass); --ok: var(--tempo-thread); --warn: var(--tempo-signal); --err: var(--tempo-branch);
+  --ok-bg: color-mix(in srgb, var(--tempo-thread) 12%, var(--tempo-archive)); --warn-bg: color-mix(in srgb, var(--tempo-signal) 12%, var(--tempo-archive)); --err-bg: color-mix(in srgb, var(--tempo-branch) 14%, var(--tempo-archive)); --info-bg: color-mix(in srgb, var(--tempo-brass) 12%, var(--tempo-archive));
+  --tempo-glow: 0 0 10px color-mix(in srgb, var(--tempo-thread) 45%, transparent); --tempo-selection: #24423b;
+}
+/* 부품 모양. specimen과 Claude Design 미리보기가 같이 쓴다. 색은 tempo.css 변수만 쓴다 */
+* { box-sizing: border-box; }
+.mono { font-family: "SF Mono", ui-monospace, Menlo, "D2Coding", monospace; font-variant-numeric: tabular-nums; }
+.card { position: relative; padding: 16px 18px 16px 21px; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; }
+.card::before { content: ""; position: absolute; inset: 0 auto 0 0; width: 3px; border-radius: 6px 0 0 6px; background: var(--line); }
+.card.live::before { background: var(--ok); box-shadow: var(--tempo-glow); }
+.card.fork::before { background: var(--err); }
+.card h3 { margin: 0 0 10px; font-size: 15px; }
+.sw { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 8px; }
+.sw div { overflow: hidden; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; font-size: 12px; }
+.sw i { display: block; height: 40px; }
+.sw b, .sw span { display: block; padding: 0 10px; } .sw b { padding-top: 6px; } .sw span { padding-bottom: 8px; color: var(--muted); }
+.ansi { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(8, 1fr); gap: 4px; }
+.ansi i { height: 26px; border-radius: 3px; border: 1px solid var(--line); }
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+th { padding: 6px 8px; border-bottom: 1px solid var(--line); color: var(--muted); font-size: 13px; font-weight: 600; text-align: left; }
+td { padding: 8px; border-bottom: 1px solid color-mix(in srgb, var(--line) 60%, transparent); }
+td.n { color: var(--muted); text-align: right; }
+.st { display: inline-flex; align-items: center; gap: 6px; padding: 1px 9px 1px 7px; border-radius: 999px; font-size: 12.5px; font-weight: 600; }
+.st::before { content: ""; width: 7px; height: 7px; }
+.st.ok { color: var(--ok); background: var(--ok-bg); } .st.ok::before { border-radius: 50%; background: currentColor; box-shadow: var(--tempo-glow); }
+.st.warn { color: var(--warn); background: var(--warn-bg); } .st.warn::before { width: 0; height: 0; border: 4px solid transparent; border-top: 0; border-bottom: 7px solid currentColor; }
+.st.err { color: var(--err); background: var(--err-bg); } .st.err::before { background: currentColor; transform: rotate(45deg) scale(.8); }
+.st.idle { color: var(--muted); background: var(--soft); } .st.idle::before { border: 1.5px solid currentColor; border-radius: 50%; }
+.btns { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+button { padding: 7px 14px; border: 1px solid var(--line); border-radius: 4px; background: var(--soft); color: var(--ink); font: 600 14px inherit; font-family: inherit; }
+button.pri { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+button.danger { background: transparent; border-color: color-mix(in srgb, var(--err) 50%, var(--line)); color: var(--err); }
+button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+a { color: var(--accent); text-underline-offset: 3px; }
+.big { display: flex; align-items: baseline; gap: 12px; margin: 4px 0 12px; }
+.big b { font-size: 34px; font-weight: 800; letter-spacing: -.02em; }
+.big span { color: var(--muted); font-size: 13px; }
+svg.g { display: block; width: 100%; height: 80px; border-bottom: 1px solid var(--line); background: color-mix(in srgb, var(--ok) 4%, transparent); }
+svg.g .ln { fill: none; stroke: var(--ok); stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+svg.g .ar { fill: color-mix(in srgb, var(--ok) 13%, transparent); }
+.tl { position: relative; margin: 0; padding-left: 26px; list-style: none; }
+.tl::before { content: ""; position: absolute; left: 8px; top: 6px; bottom: 6px; width: 2px; background: var(--ok); box-shadow: var(--tempo-glow); }
+.tl li { position: relative; padding: 4px 0 10px; }
+.tl li::before { content: ""; position: absolute; left: -22px; top: 11px; width: 10px; height: 10px; border: 2px solid var(--ok); border-radius: 50%; background: var(--bg); }
+.tl li.fork::before { border-color: var(--err); border-radius: 2px; transform: rotate(45deg); }
+.tl time { margin-right: 8px; color: var(--accent); font-size: 12.5px; }
+.tl .x { color: var(--muted); font-size: 13px; }
+pre { margin: 0; padding: 12px 14px; background: var(--tempo-void); border: 1px solid var(--line); border-radius: 4px; font-size: 13px; line-height: 1.55; overflow-x: auto; }
+/* Claude Design 카드 틀. 두 변형을 나란히 놓는다 */
+body { margin: 0; font: 15px/1.6 -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard", "Noto Sans KR", sans-serif; word-break: keep-all; }
+.pair { display: grid; grid-template-columns: 1fr 1fr; }
+.v { padding: 18px 20px; background: var(--bg); color: var(--ink); }
+.v > h3 { margin: 0 0 10px; font-size: 15px; }
+.v > h3 ~ h3 { margin-top: 18px; }
+.v > p { margin: 8px 0; }
+.v .sw { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); }
+.row { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { display: inline-block; width: 12px; height: 12px; margin-right: 6px; border: 1px solid var(--line); border-radius: 3px; vertical-align: -1px; }
+.t-label, .t-muted { color: var(--muted); font-size: 13px; }
+.t-h1 { font-size: 28px; font-weight: 800; letter-spacing: -.02em; line-height: 1.3; }
+.t-h2 { font-size: 20px; font-weight: 800; }
+.t-h3 { font-size: 15px; font-weight: 700; }
+.t-num { color: var(--accent); font-size: 17px; }
+</style>
+<body>
+<div class="pair">
+<section class="v tempo-ember">
+<h3>템포 · 먹 · 터미널</h3>
+<pre class="mono"><span style="color:var(--tempo-thread)">dev1@dev-1</span>:<span style="color:var(--tempo-brass)">~/repo</span> (main <span style="color:var(--tempo-signal)">↑2</span>) $ git status
+<span style="color:var(--tempo-branch)">	modified:   prompt.sh</span>
+<span style="color:var(--tempo-thread)">	new file:   themes/tempo.sh</span></pre>
+</section>
+<section class="v tempo-thread">
+<h3>템포 · 시간선 · 터미널</h3>
+<pre class="mono"><span style="color:var(--tempo-thread)">dev1@dev-1</span>:<span style="color:var(--tempo-brass)">~/repo</span> (main <span style="color:var(--tempo-signal)">↑2</span>) $ git status
+<span style="color:var(--tempo-branch)">	modified:   prompt.sh</span>
+<span style="color:var(--tempo-thread)">	new file:   themes/tempo.sh</span></pre>
+</section>
+</div>
+</body>
+</html>
