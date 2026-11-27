@@ -6,7 +6,7 @@ Tempo는 **토큰만 있는 테마**다. React 컴포넌트가 없어서 `window
 
 1. `tokens.css`, `components/bundle.css` 순서로 링크한다. `components/bundle.js`는 빈 스크립트다.
 2. 변형을 고른다: `<html data-theme="tempo-ember">`(따뜻한 먹색 + 놋쇠) 또는 `data-theme="tempo-thread"`(푸른 검정 + 호박). 한 영역만 바꿀 때는 `class="tempo-thread"`를 쓴다.
-   - `data-theme`이나 클래스가 없으면 `tokens.css`의 ember 기본값만 적용된다. 이때 `--ok-bg` `--warn-bg` `--err-bg` `--info-bg` `--tempo-glow`는 정의되지 않아서 배지 바탕과 빛이 아무 경고 없이 사라진다.
+   - 변형은 반드시 지정한다. 지정하지 않으면 `--ok-bg` `--warn-bg` `--err-bg` `--info-bg` `--tempo-glow`가 정의되지 않아서, 배지 바탕과 빛이 아무 경고 없이 사라진다. `components/bundle.css`만 링크했다면 변수가 하나도 정의되지 않는다.
 3. 밝은 테마는 없다. `body`에 `background: var(--bg); color: var(--ink)`를 직접 준다.
 
 ## 토큰
