@@ -193,7 +193,9 @@ def claude_design():
 
 
 def outputs():
-    files = {"dist/css/tempo.css": css(), "dist/swift/TempoTheme.swift": swift(), "specimen/index.html": specimen()}
+    kit = css() + "/* design/components.css */\n" + (ROOT / "design" / "components.css").read_text()
+    files = {"dist/css/tempo.css": css(), "dist/css/tempo-kit.css": kit,
+             "dist/swift/TempoTheme.swift": swift(), "specimen/index.html": specimen()}
     for key, v in TOKENS["variants"].items():
         files[f"dist/iterm2/{v['title']}.itermcolors"] = itermcolors(v)
         files[f"dist/ghostty/tempo-{key}"] = ghostty(v)

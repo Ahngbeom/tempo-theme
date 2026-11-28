@@ -3,7 +3,7 @@
   "globalName": "Tempo",
   "shape": "package",
   "buildCmd": "python3 generate.py",
-  "cssEntry": "dist/css/tempo.css",
+  "cssEntry": "dist/css/tempo-kit.css",
   "guidelinesGlob": [
     "design/guide.md"
   ],

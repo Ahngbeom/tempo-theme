@@ -73,5 +73,21 @@ class Generate(unittest.TestCase):
         self.assertEqual(guide, (ROOT / "design/guide.md").read_text())
 
 
+    def test_kit_has_tokens_and_parts(self):
+        kit = (ROOT / "dist/css/tempo-kit.css").read_text()
+        self.assertTrue(kit.startswith((ROOT / "dist/css/tempo.css").read_text()))
+        self.assertTrue(kit.endswith((ROOT / "design/components.css").read_text()))
+
+    def test_conventions_classes_exist_in_kit(self):
+        import re
+        kit = (ROOT / "dist/css/tempo-kit.css").read_text()
+        conv = (ROOT / ".design-sync/conventions.md").read_text()
+        part = conv.split("## 부품 클래스", 1)[1].split("## 어디를 읽나", 1)[0]
+        names = set(re.findall(r"\.([a-z][a-z0-9-]*)", " ".join(re.findall(r"`([^`]+)`", part))))
+        self.assertTrue(names)
+        missing = sorted(n for n in names if not re.search(r"\." + re.escape(n) + r"(?![a-z0-9-])", kit))
+        self.assertEqual(missing, [])
+
+
 if __name__ == "__main__":
     unittest.main()

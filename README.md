@@ -40,17 +40,17 @@ Claude Design에 올리는 길은 둘이고, 올라가는 내용이 다르다.
 
 | 길 | 올라가는 것 | 어디로 |
 |---|---|---|
-| `/design-sync` | `dist/css/tempo.css`(토큰), `design/guide.md`(안내문), `.design-sync/conventions.md`(README 머리) | Design System artifact `Tempo`. 대상은 `.design-sync/artifact.json` |
+| `/design-sync` | `dist/css/tempo-kit.css`(토큰 + `design/components.css` 부품 클래스), `design/guide.md`(안내문), `.design-sync/conventions.md`(README 머리) | Design System artifact `Tempo`. 대상은 `.design-sync/artifact.json` |
 | `dist/claude-design/` 묶음 | 아래 표의 파일. 카드 포함 | claude.ai/design 프로젝트에 손으로 올린다 |
 
-`design/cards/`와 `design/components.css`는 `dist/claude-design/` 묶음에만 들어간다. `/design-sync`로는 올라가지 않는다.
+`design/cards/` 미리보기 카드는 `dist/claude-design/` 묶음에만 들어간다. `/design-sync`로는 부품 클래스만 올라가고 카드는 올라가지 않는다.
 
 ### `/design-sync`
 
 1. `tokens.json`이나 `design/guide.md`를 고치고 `python3 generate.py`로 다시 만든다
 2. 이 저장소에서 Claude Code의 `/design-sync`를 실행한다. 설정은 `.design-sync/config.json`에 있다
 
-토큰 이름을 바꾸면 `.design-sync/conventions.md`의 토큰 표도 같이 고친다.
+토큰 이름이나 부품 클래스를 바꾸면 `.design-sync/conventions.md`의 토큰 표·부품 표도 같이 고친다.
 
 ### `dist/claude-design/` 묶음
 
