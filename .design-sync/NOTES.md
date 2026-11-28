@@ -2,7 +2,7 @@
 
 - Tokens-only DS: no React components. Root `package.json` and `index.js` (`export {};`) exist only so the converter has a package entry; `[ZERO_MATCH] ... treating as tokens-only DS` is expected.
 - Build: `python3 generate.py` regenerates `dist/` (committed). Converter deps (esbuild, ts-morph, @types/react, react@18, react-dom@18) are installed in `.ds-sync/`; pass `--node-modules ./.ds-sync/node_modules --entry ./index.js`.
-- Driver runs with `--no-render-check`: there are no previews to render, so playwright was never installed. `! [RENDER_SKIPPED]` is the one expected warning. `[DTS_REACT]` is irrelevant with zero components.
+- Driver runs with `--no-render-check`: there are no previews to render, so playwright was never installed. `! [RENDER_SKIPPED]` is expected. So is `! [FONT_MISSING] "D2Coding"`: `design/guide.md` uses system fonts only and downloads no web fonts, so no `@font-face` ships. `[DTS_REACT]` is irrelevant with zero components.
 - Published CSS is `dist/css/tempo-kit.css` (`cssEntry`): `generate.py` concatenates `dist/css/tempo.css` and `design/components.css`, so the part classes (`.card`, `.st.*`, `.bt*`, `.dial*`, `.stamp`, …) and element base styles reach the design agent. `design/guide.md` is the only guideline. The `design/cards/*.html` @dsCard cards are NOT synced; they target the older claude.ai/design bundle in `dist/claude-design/`.
 - `tokens.json` shows 23 of 28 vars: `--ok-bg` `--warn-bg` `--err-bg` `--info-bg` `--tempo-glow` use `color-mix()`, which the artifact page cannot read. They still ship in `components/bundle.css`, but only under `[data-theme="tempo-*"]` / `.tempo-*`; the conventions header tells the agent to set `data-theme`.
 
