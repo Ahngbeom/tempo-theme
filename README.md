@@ -28,13 +28,29 @@
 | 256색 도구 | `dist/ansi256/tempo-ember.json` | 원색·16색마다 가장 가까운 xterm 256색 번호. shell-prompt·claude-statusline 테마가 쓴다 |
 | Swift (AppKit) | `dist/swift/TempoTheme.swift` | `TempoTheme.ember.brass` 같은 `NSColor` |
 | Obsidian | `dist/obsidian/tempo-ember.css` | 보관함의 `.obsidian/snippets/`에 복사하고 설정 > 모양 > CSS 스니펫에서 켠다. 어두운 모드에서만 적용된다 |
-| Claude Design | `dist/claude-design/` | 디자인 시스템 프로젝트에 올린다. 아래 "Claude Design" 참고 |
+| Claude Design | `dist/claude-design/`, `/design-sync` | 아래 "Claude Design" 참고 |
 
 다른 저장소는 필요한 파일을 복사해 가고, 파일 머리나 커밋 메시지에 이 저장소의 커밋을 적는다.
 
 ## Claude Design
 
-`dist/claude-design/`은 Claude Design 디자인 시스템 프로젝트에 올리는 묶음이다.
+Claude Design에 올리는 길은 둘이고, 올라가는 내용이 다르다.
+
+| 길 | 올라가는 것 | 어디로 |
+|---|---|---|
+| `/design-sync` | `dist/css/tempo.css`(토큰), `design/guide.md`(안내문), `.design-sync/conventions.md`(README 머리) | Design System artifact `Tempo`. 대상은 `.design-sync/artifact.json` |
+| `dist/claude-design/` 묶음 | 아래 표의 파일. 카드 포함 | claude.ai/design 프로젝트에 손으로 올린다 |
+
+`design/cards/`와 `design/components.css`는 `dist/claude-design/` 묶음에만 들어간다. `/design-sync`로는 올라가지 않는다.
+
+### `/design-sync`
+
+1. `tokens.json`이나 `design/guide.md`를 고치고 `python3 generate.py`로 다시 만든다
+2. 이 저장소에서 Claude Code의 `/design-sync`를 실행한다. 설정은 `.design-sync/config.json`에 있다
+
+토큰 이름을 바꾸면 `.design-sync/conventions.md`의 토큰 표도 같이 고친다.
+
+### `dist/claude-design/` 묶음
 
 | 파일 | 원본 |
 |---|---|
@@ -44,7 +60,7 @@
 
 1. 카드를 더하거나 고치려면 `design/cards/`에 조각을 쓴다. 첫 줄은 `<!-- @dsCard group="묶음" -->`, 본문에서 `{{label}}` `{{swatches}}` `{{ansi}}` `{{semantic}}`을 쓸 수 있다. 부품 모양은 `design/components.css`
 2. `python3 generate.py`로 다시 만든다
-3. 이 저장소에서 Claude Code의 `/design-sync`로 `dist/claude-design/`을 프로젝트에 맞춘다
+3. `dist/claude-design/`의 파일을 claude.ai/design 프로젝트에 올린다
 
 Claude Design에서 색을 직접 고치지 않는다. 고친 색은 다른 도구 파일과 어긋난다.
 

@@ -1,0 +1,11 @@
+{
+  "pkg": "tempo-theme",
+  "globalName": "Tempo",
+  "shape": "package",
+  "buildCmd": "python3 generate.py",
+  "cssEntry": "dist/css/tempo.css",
+  "guidelinesGlob": [
+    "design/guide.md"
+  ],
+  "readmeHeader": ".design-sync/conventions.md"
+}

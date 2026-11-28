@@ -1,1 +1,7 @@
 __pycache__/
+.ds-sync/
+ds-bundle/
+node_modules/
+.design-sync/.cache/
+.design-sync/learnings/
+.design-sync/node_modules
