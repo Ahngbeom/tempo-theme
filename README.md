@@ -1,6 +1,6 @@
 # tempo-theme
 
-개발 환경 전체(대시보드, 터미널, 셸 프롬프트, Claude Code 상태줄, 메뉴 막대 앱, 블로그, Obsidian)에서 같이 쓰는 어두운 테마다. 색의 원본은 `tokens.json` 하나이고, 도구별 파일은 `generate.py`가 `dist/`에 만든다.
+개발 환경 전체(대시보드, 터미널, 셸 프롬프트, Claude Code 상태줄, 블로그, Obsidian)에서 같이 쓰는 어두운 테마다. 색의 원본은 `tokens.json` 하나이고, 도구별 파일은 `generate.py`가 `dist/`에 만든다.
 
 아날로그 계기판처럼 어두운 바탕에 신호 셋(녹색·노랑·적주황)과 틀 색 하나를 둔다. 같은 색을 웹·터미널·앱에서 똑같이 읽도록 대비를 생성 단계에서 검사한다.
 
@@ -26,9 +26,11 @@
 | Ghostty | `dist/ghostty/tempo-ember` | `~/.config/ghostty/themes/`에 복사하고 설정에 `theme = tempo-ember` |
 | herdr | `dist/herdr/tempo-ember.toml` | 내용을 `~/.config/herdr/config.toml`에 붙이고 `herdr server reload-config`. 또는 `[theme] name = "terminal"`로 두면 터미널 16색을 그대로 따른다 |
 | 256색 도구 | `dist/ansi256/tempo-ember.json` | 원색·16색마다 가장 가까운 xterm 256색 번호. shell-prompt·claude-statusline 테마가 쓴다 |
-| Swift (AppKit) | `dist/swift/TempoTheme.swift` | `TempoTheme.ember.brass` 같은 `NSColor` |
+| Swift (AppKit) | `dist/swift/TempoTheme.swift` | `TempoTheme.ember.brass` 같은 `NSColor` . 어두운 바탕을 직접 그리는 앱에만 쓴다 |
 | Obsidian | `dist/obsidian/tempo-ember.css` | 보관함의 `.obsidian/snippets/`에 복사하고 설정 > 모양 > CSS 스니펫에서 켠다. 어두운 모드에서만 적용된다 |
 | Claude Design | `dist/claude-design/`, `/design-sync` | 아래 "Claude Design" 참고 |
+
+바탕을 시스템이 칠하는 곳에는 적용하지 않는다. 예를 들어 cc-menutor의 메뉴바와 드롭다운은 라이트·다크·투명 바탕 위에 그려지고, 밝은 메뉴바(#ECECEC)에서 `thread`·`signal`의 대비가 1.2~1.4:1로 떨어진다. cc-menutor는 두 바탕 모두에서 3.5:1을 지키는 자체 색을 그대로 쓴다.
 
 다른 저장소는 필요한 파일을 복사해 가고, 파일 머리나 커밋 메시지에 이 저장소의 커밋을 적는다.
 
