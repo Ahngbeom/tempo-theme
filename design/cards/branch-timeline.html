@@ -1,0 +1,23 @@
+<!-- @dsCard group="Timeline" -->
+<h3>{{label}} · 갈래 시간선</h3>
+<figure class="bt">
+<svg viewBox="0 0 400 130" role="img" aria-label="본선에서 갈래 둘이 나뉘고, 그중 하나는 잘렸다">
+<path class="bt-fork" d="M110,70 C140,70 140,28 175,28 H300"/>
+<path class="bt-cut" d="M215,70 C240,70 240,106 270,106 H318"/>
+<path class="bt-main" d="M14,70 H372"/>
+<circle class="bt-node" cx="40" cy="70" r="5"/>
+<circle class="bt-node fork" cx="110" cy="70" r="5"/>
+<circle class="bt-node" cx="215" cy="70" r="5"/>
+<circle class="bt-node fork" cx="300" cy="28" r="5"/>
+<rect class="bt-end" x="313" y="101" width="10" height="10" transform="rotate(45 318 106)"/>
+<circle class="bt-halo" cx="372" cy="70" r="6"/>
+<circle class="bt-now" cx="372" cy="70" r="6"/>
+<text class="t" x="40" y="92" text-anchor="middle">09:12</text>
+<text class="t" x="110" y="92" text-anchor="middle">10:40</text>
+<text class="t" x="215" y="92" text-anchor="middle">13:05</text>
+<text x="300" y="15" text-anchor="middle">feat/dial</text>
+<text x="318" y="125" text-anchor="middle">fix/old</text>
+<text class="t" x="372" y="92" text-anchor="middle">지금</text>
+</svg>
+<figcaption><span><i></i>본선</span><span><i class="fork"></i>갈래</span><span><i class="cut"></i>잘린 갈래 ◆</span></figcaption>
+</figure>

@@ -58,7 +58,7 @@ Claude Design에 올리는 길은 둘이고, 올라가는 내용이 다르다.
 |---|---|
 | `README.md` | `design/guide.md` 그대로 |
 | `tokens.css` | `dist/css/tempo.css`와 같다 |
-| `preview/*.html` | `design/cards/*.html` 조각을 두 변형으로 나란히 펼친 카드. 첫 줄 `@dsCard` 표시로 디자인 시스템 창의 묶음(Colors·Type·Components·Terminal)이 정해진다 |
+| `preview/*.html` | `design/cards/*.html` 조각을 두 변형으로 나란히 펼친 카드. 첫 줄 `@dsCard` 표시로 디자인 시스템 창의 묶음(Colors·Type·Components·Timeline·Terminal)이 정해진다 |
 
 1. 카드를 더하거나 고치려면 `design/cards/`에 조각을 쓴다. 첫 줄은 `<!-- @dsCard group="묶음" -->`, 본문에서 `{{label}}` `{{swatches}}` `{{ansi}}` `{{semantic}}`을 쓸 수 있다. 부품 모양은 `design/components.css`
 2. `python3 generate.py`로 다시 만든다
